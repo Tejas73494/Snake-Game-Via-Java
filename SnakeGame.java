@@ -209,3 +209,5 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {}
 }
+
+//Game inspired by and built from Kenny Yip Coding
