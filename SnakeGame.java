@@ -65,13 +65,6 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     }
 
     public void draw(Graphics g) {
-        // //Grid
-        // for(int i = 0; i < boardWidth/tileSize; i++) {
-        //     //(x1, y1, x2, y2)
-        //     g.drawLine(i*tileSize, 0, i*tileSize, boardHeight);
-        //     g.drawLine(0, i*tileSize, boardWidth, i*tileSize); 
-        // }
-
         //Food
         g.setColor(Color.red);
         g.fillRect(food.x*tileSize, food.y * tileSize, tileSize, tileSize);
@@ -81,14 +74,12 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
         //Snake Head
         g.setColor(Color.green);
-        // g.fillRect(snakeHead.x *tileSize, snakeHead.y *tileSize, tileSize, tileSize);
         g.fill3DRect(snakeHead.x *tileSize, snakeHead.y *tileSize, tileSize, tileSize, true);
 
 
         //Snake Body
         for (int i =0; i < snakeBody.size(); i++) {
             Tile snakePart = snakeBody.get(i);
-            // g.fillRect(snakePart.x * tileSize, snakePart.y * tileSize, tileSize, tileSize);
             g.fill3DRect(snakePart.x * tileSize, snakePart.y * tileSize, tileSize, tileSize, true);
 
         }
@@ -98,6 +89,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         if (gameOver) {
             g.setColor(Color.red);
             g.drawString("Game Over: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+            g.drawString("Press R to restart!", tileSize - 16, tileSize + 16);
 
         }
         else {
@@ -136,6 +128,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
                 snakePart.y = prevSnakePart.y;
             }
         }
+
+        
+        
 
 
 
@@ -188,8 +183,24 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             velocityX = 1;
             velocityY = 0;
         }
+        else if (e.getKeyCode() == KeyEvent.VK_R) {
+            restartGame();
+        }
     }
-
+    //Restart Game
+        public void restartGame() {
+            snakeHead = new Tile(5, 5);
+            snakeBody = new ArrayList<Tile>();
+        
+            placeFood();
+        
+            velocityX = 0;
+            velocityY = 0;
+        
+            gameOver = false;
+        
+            gameLoop.start();
+        }
 
 // not needed
     @Override
