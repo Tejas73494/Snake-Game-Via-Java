@@ -108,7 +108,6 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     public void placeFood() {
         food.x = random.nextInt(boardWidth/tileSize); // 24
         food.y = random.nextInt(boardHeight/tileSize);
-
     }
 
     public boolean collision(Tile tile1, Tile tile2) {
